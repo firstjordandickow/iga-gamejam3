@@ -21,19 +21,24 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]private bool lookRight;
 
     [Header("Pickup Variables")]
+    public int totalItem1;
+    public int totalItem2;
     public int pickup1Counter;
     public int pickup2Counter;
-/*    public int pickup3Counter;*/
     public TextMeshProUGUI pickupText1;
     public TextMeshProUGUI pickupText2;
-/*    public TextMeshProUGUI pickupText3;*/
 
+    [Header("Shoot variables")]
+    public GameObject bullet;
+    public Transform bulletSpawn;
+    public float timeToShoot;
+
+    public Vector2 checkpointPosition;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
-        
         lookRight = true;
         isGrounded = true;
     }
@@ -68,6 +73,21 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity += Vector2.up * Physics2D.gravity.y * 2.5f * Time.deltaTime;
         }
+
+        //Reset the player's position to a checkpoint if player is stuck or falls down
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            ResetPlayer();
+        }
+
+        //Player shooting code
+        timeToShoot += Time.deltaTime;
+
+        if(Input.GetKeyDown(KeyCode.F) && timeToShoot > 1f)
+        {
+            Instantiate(bullet, bulletSpawn.position, Quaternion.identity);
+            timeToShoot = 0;
+        }
     }
 
     void FixedUpdate()
@@ -81,5 +101,10 @@ public class PlayerMovement : MonoBehaviour
         Vector3 playerScale = transform.localScale;
         playerScale.x *= -1;
         transform.localScale = playerScale;
+    }
+
+    public void ResetPlayer()
+    {
+        this.transform.position = checkpointPosition;
     }
 }

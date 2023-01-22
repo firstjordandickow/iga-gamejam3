@@ -7,7 +7,13 @@ public class CollectMaterial : MonoBehaviour
 {
     public TextMeshProUGUI pickupText;
     public GameObject player;
+    public int totalItems;
     public string objectType;
+
+    private void Start()
+    {
+
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -16,13 +22,13 @@ public class CollectMaterial : MonoBehaviour
             if (objectType == "Circle")
             {
                 player.GetComponent<PlayerMovement>().pickup1Counter += 1;
-                pickupText.text = player.GetComponent<PlayerMovement>().pickup1Counter.ToString() + "/2";
+                pickupText.text = player.GetComponent<PlayerMovement>().pickup1Counter.ToString() + "/" + totalItems.ToString();
                 this.gameObject.SetActive(false);
             }
             else if(objectType == "Square")
             {
                 player.GetComponent<PlayerMovement>().pickup2Counter += 1;
-                pickupText.text = player.GetComponent<PlayerMovement>().pickup2Counter.ToString() + "/2";
+                pickupText.text = player.GetComponent<PlayerMovement>().pickup2Counter.ToString() + "/" + totalItems.ToString();
                 this.gameObject.SetActive(false);
             }
         }
