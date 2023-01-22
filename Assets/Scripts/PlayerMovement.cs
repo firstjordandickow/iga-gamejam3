@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     public float checkRadius;
     public LayerMask groundLayer;
 
-    [SerializeField]private bool lookRight;
+    public bool lookRight;
 
     [Header("Pickup Variables")]
     public int totalItem1;

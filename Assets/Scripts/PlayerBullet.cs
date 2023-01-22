@@ -16,7 +16,10 @@ public class PlayerBullet : MonoBehaviour
 
         player = GameObject.FindGameObjectWithTag("Player");
 
-        bulletRb.velocity = player.transform.right * bulletSpeed;
+        if(player.GetComponent<PlayerMovement>().lookRight == true)
+            bulletRb.velocity = player.transform.right * bulletSpeed;
+        else if(player.GetComponent<PlayerMovement>().lookRight == false)
+            bulletRb.velocity = -player.transform.right * bulletSpeed;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

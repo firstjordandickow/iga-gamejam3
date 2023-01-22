@@ -34,7 +34,7 @@ public class EnemyShoots : MonoBehaviour
             Flip();
         }
 
-        if (distance < 12f)
+        if (distance < 20f)
         {
             if (cooldownTime > 2f)
             {
