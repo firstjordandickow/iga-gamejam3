@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
 
     private float moveInput;
     private Rigidbody2D rb;
+/*    public Animator anim;*/
 
     [Header("Ground Check Variables")]
     [SerializeField] bool isGrounded;
@@ -39,6 +40,8 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
+/*        anim = this.GetComponent<Animator>();*/
+
         lookRight = true;
         isGrounded = true;
     }
@@ -48,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
         //Get the movement input from user
         moveInput = Input.GetAxisRaw("Horizontal");
 
+/*        anim.SetFloat("move", moveInput);*/
 
         //Flip character sprite to look left
         if(lookRight && moveInput < 0f)
@@ -67,6 +71,7 @@ public class PlayerMovement : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+/*            anim.SetTrigger("jumping");*/
         }
 
         if(rb.velocity.y < 0)
@@ -83,7 +88,7 @@ public class PlayerMovement : MonoBehaviour
         //Player shooting code
         timeToShoot += Time.deltaTime;
 
-        if(Input.GetKeyDown(KeyCode.F) && timeToShoot > 1f)
+        if(Input.GetKeyDown(KeyCode.F) && timeToShoot > 0.5f)
         {
             Instantiate(bullet, bulletSpawn.position, Quaternion.identity);
             timeToShoot = 0;

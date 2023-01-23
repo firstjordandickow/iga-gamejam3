@@ -8,6 +8,8 @@ public class DayNightCycle : MonoBehaviour
 
     [SerializeField] float seconds;
     public float timeTillNight;
+
+    public List<GameObject> enemies = new List<GameObject>();
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +27,10 @@ public class DayNightCycle : MonoBehaviour
         else if (seconds >= timeTillNight)
         {
             globalVolume.weight = 1f;
+            foreach(GameObject i in enemies)
+            {
+                i.SetActive(true);
+            }
         }
     }
 }

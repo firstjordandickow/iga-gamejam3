@@ -16,13 +16,12 @@ public class EnemyShoots : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        lookRight = true;
+        lookRight = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-
         float distance = Vector2.Distance(player.transform.position, transform.position);
 
         if(player.transform.position.x > transform.position.x && !lookRight)
